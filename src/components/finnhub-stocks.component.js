@@ -1,18 +1,31 @@
 import React from 'react';
-var colors = ['#6A1B9A', '#76FF03', '#4527A0'];
 
-var List = (props) => {
+const Finnhub = (props) => {
   return (
-    <div>
-      {props.users.map((user, i) => {
-        return (
-          <div key={i} style={{ color: colors[i % 3] }}>
-            {user}
-          </div>
-        );
-      })}
+    <div className='FinnhubContainer'>
+      <div className='row'>
+        <table>
+          <thead>
+            <tr>
+              <th scope='col'>Brought to you by Finnhub</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id='news'>
+              <th scope='row'>Company News Score</th>
+              <td>{props.news.companyNewsScore}</td>
+            </tr>
+            <tr id='sentiment'>
+              <th scope='row'>Bullish?</th>
+              <td>
+                {props.news.sectorAverageBullishPercent > 0.5 ? 'Yes' : 'No'}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
-export default List;
+export default Finnhub;
