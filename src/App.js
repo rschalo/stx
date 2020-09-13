@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+require('dotenv').config();
 
 function App() {
   const [hasError, setErrors] = useState(false);
@@ -11,11 +12,11 @@ function App() {
   const [recommendation, setRecommendation] = useState({});
 
   const iexAPIbase = 'https://cloud.iexapis.com/stable/stock/';
-  const iexAPItail = '?token=pk_4318dcc6e34d4045b6554ab44800d38c';
+  const iexAPItail = `?token=${process.env.REACT_APP_IEX_TOKEN}`;
   const iexAPIcalls = '/quote';
 
   const finnhubAPIbase = 'https://finnhub.io/api/v1/';
-  const finnhubAPItail = '&token=bt9cf4748v6sbe2pt2pg';
+  const finnhubAPItail = `&token=${process.env.REACT_APP_FINNHUB_TOKEN}`;
   const finnhubAPIcalls = [
     'news-sentiment',
     'stock/profile2',
