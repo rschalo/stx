@@ -3,6 +3,14 @@ import React from 'react';
 const Finnhub = (props) => {
   return (
     <div className='FinnhubContainer'>
+      <h2>Finnhub</h2>
+      <ul>
+        <li>Company News Score</li>
+        <li>{props.news.companyNewsScore}</li>
+        <li>{props.news.companyNewsScore}</li>
+      </ul>
+      <div>hi</div>
+      <div>bye</div>
       <div className='row'>
         <table>
           <thead>
