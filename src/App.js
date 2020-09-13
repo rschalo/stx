@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import Finnhub from './components/finnhub-stocks.component';
+import IEX from './components/iex-stocks.component';
 require('dotenv').config();
 
 function App() {
@@ -28,6 +30,17 @@ function App() {
       `${finnhubAPIbase}${finnhubAPIcalls[i]}?symbol=${symbol}${finnhubAPItail}`
     );
   }
+
+  let date = new Date();
+  const today = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .split('T')[0];
+
+  // TODO: check for end of month
+  let yesterday = today.split('-');
+  yesterday[2] = String(Number(yesterday[2]) + 1);
+  yesterday = yesterday.join('-');
+
   const handleClick = () => {
     let input = document.getElementById('symbolInput');
     input.select();
@@ -69,50 +82,18 @@ function App() {
             value={symbol}
             onClick={handleClick}
             onChange={(e) => setSymbol(e.target.value)}></input>
-          <input type='submit' value='Get Stock Info'></input>
+          <button type='submit' value='Get Stock Info'>
+            Submit
+          </button>
         </form>
       </header>
       <div className='container'>
-        {!hasError ? null : <div>See error: {hasError}</div>}
         <div className='companyCard'>{`${company.name}`}</div>
-        <div className='row'>
-          <table>
-            <thead>
-              <tr>
-                <th scope='col'>Brought to you by Finnhub</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id='news'>
-                <th scope='row'>Company News Score</th>
-                <td>{news.companyNewsScore}</td>
-              </tr>
-              <tr id='sentiment'>
-                <th scope='row'>Bullish?</th>
-                <td>{news.sectorAverageBullishPercent > 0.5 ? 'Yes' : 'No'}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className='row'>
-          <table>
-            <thead>
-              <tr>
-                <th scope='col'>Brought to you by IEX</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id='high'>
-                <th scope='row'>Daily High</th>
-                <td>{dailyPrice.high}</td>
-              </tr>
-              <tr id='low'>
-                <th scope='row'>Daily Low</th>
-                <td>{dailyPrice.low}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      </div>
+      <div className='container'>
+        {!hasError ? null : <div>See error: {hasError}</div>}
+        <Finnhub news={news} />
+        <IEX dailyPrice={dailyPrice} />
       </div>
     </div>
   );
