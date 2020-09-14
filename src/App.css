@@ -32,6 +32,16 @@ a {
   margin-left: 5px;
 }
 
+/* visited link */
+a:visited {
+  color: rgb(179, 53, 44);
+}
+
+/* unvisited link */
+a:link {
+  color: rgb(4, 116, 10);
+}
+
 /* Begin Stock Info Component Styling */
 
 .StockContainer {
@@ -43,7 +53,7 @@ a {
 }
 
 .InfoContainer {
-  width: 80%;
+  width: calc(88% + 10px);
   background: rgb(49, 49, 49);
   border: solid gray 1px;
   border-radius: 5px;
@@ -54,16 +64,20 @@ a {
 }
 
 .InfoPiece {
-  min-width: 25%;
-  background: rgb(22, 99, 161);
-  border: solid gray 1px;
-  border-radius: 5px;
+  min-width: 158px;
+  background: rgb(12, 158, 168);
+  border: solid gray 2px;
+  border-radius: 15px;
   margin: 5px;
   min-height: 20px;
+  text-align: left;
+  padding: 0.5% 1%;
 }
 
 .companyCard {
-  width: 200px;
+  text-transform: uppercase;
+  min-width: 200px;
+  max-width: 350px;
   height: 30px;
   background: rgb(49, 49, 49);
   border: solid 2px grey;
@@ -71,6 +85,7 @@ a {
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 15px;
+  padding: 1% 1%;
   color: white;
   font-size: 18px;
 }
@@ -78,12 +93,13 @@ a {
 /* Begin Finnhub Component Styling */
 
 .FinnhubContainer {
-  width: 40%;
-  background: rgb(22, 99, 161);
-  border: solid gray 1px;
+  width: 44%;
+  background: rgba(49, 49, 49, 0.8);
+  border: solid gray 2px;
   border-radius: 5px;
   margin: 5px;
-  min-height: 280px;
+  min-height: 150px;
+  color: white;
 }
 
 .FinnhubList {
@@ -95,12 +111,13 @@ a {
 /* Begin IEX Component Styling */
 
 .IEXContainer {
-  width: 40%;
-  background: rgb(219, 106, 30);
-  border: solid gray 1px;
+  width: 44%;
+  background: rgba(49, 49, 49, 0.8);
+  border: solid gray 2px;
   border-radius: 5px;
   margin: 5px;
-  min-height: 280px;
+  min-height: 200px;
+  color: white;
 }
 
 .IEXList {
@@ -128,17 +145,9 @@ a {
   box-shadow: none;
 }
 
-table {
-  margin: 3%;
-}
-
 #sentiment,
 #news,
 #high,
 #low {
   text-align: left;
-}
-
-td {
-  vertical-align: right;
 }

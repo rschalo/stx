@@ -9,7 +9,7 @@ require('dotenv').config();
 
 function App() {
   const [hasError, setErrors] = useState(false);
-  const [symbol, setSymbol] = useState('Enter Company Ticker');
+  const [symbol, setSymbol] = useState('');
   const [newsSentiment, setNewsSentiment] = useState({});
   const [finnhubNews, setFinnhubNews] = useState({});
   const [company, setCompany] = useState({ name: 'Search Ticker Above' });
@@ -44,9 +44,13 @@ function App() {
         );
         getIEX(symbol).then(([priceData, iexNewsData]) => {
           setDailyPrice(priceData.data);
-          iexNewsData.data[0].lang !== 'en'
-            ? setIexNews(iexNewsData.data[1])
-            : setIexNews(iexNewsData.data[0]);
+          if (iexNewsData.data[0] === undefined) {
+            return 'No news';
+          } else {
+            iexNewsData.data[0].lang !== 'en'
+              ? setIexNews(iexNewsData.data[1])
+              : setIexNews(iexNewsData.data[0]);
+          }
         });
       } catch (error) {
         setErrors(error);
@@ -65,6 +69,7 @@ function App() {
             id='symbolInput'
             type='text'
             value={symbol}
+            placeholder='Enter Company Ticker'
             onClick={handleClick}
             onChange={(e) => setSymbol(e.target.value)}></input>
           <button type='submit' value='Get Stock Info'>
