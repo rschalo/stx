@@ -1,7 +1,5 @@
 import React from 'react';
 
-let news = [];
-
 const Finnhub = (props) => {
   return (
     <div className='FinnhubContainer'>

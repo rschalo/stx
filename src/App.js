@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './App.css';
 import getIEX from './controllers/iex-controller';
-import IEX from './components/iex-stocks.component';
 import getFinnhub from './controllers/finnhub-controller';
-import Finnhub from './components/finnhub-stocks.component';
 import APIList from './components/api-list.component';
 import StockInfo from './components/stock-info.component';
 
@@ -48,7 +45,8 @@ function App() {
             : setIexNews(iexNewsData.data[0]);
         });
       } catch (error) {
-        console.log(error);
+        setErrors(error);
+        console.log(hasError);
       }
       setSymbol('');
     }
