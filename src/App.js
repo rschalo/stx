@@ -13,9 +13,14 @@ function App() {
   const [newsSentiment, setNewsSentiment] = useState({});
   const [finnhubNews, setFinnhubNews] = useState({});
   const [company, setCompany] = useState({ name: 'Search Ticker Above' });
-  const [dailyPrice, setDailyPrice] = useState({ high: '--', low: '--' });
+  const [dailyPrice, setDailyPrice] = useState({
+    latestPrice: 'Last Price',
+    change: '--',
+    peRatio: '--',
+    week52High: '--',
+    week52Low: '--',
+  });
   const [iexNews, setIexNews] = useState({});
-  const [recommendation, setRecommendation] = useState({});
 
   const handleClick = () => {
     let input = document.getElementById('symbolInput');
@@ -32,7 +37,6 @@ function App() {
           ([newsSentimentData, companyData, recData, finnhubNewsData]) => {
             setNewsSentiment(newsSentimentData.data);
             setCompany(companyData.data);
-            setRecommendation(recData.data);
             finnhubNewsData.data[0]
               ? setFinnhubNews(finnhubNewsData.data[0])
               : setFinnhubNews('No news');
@@ -46,7 +50,7 @@ function App() {
         });
       } catch (error) {
         setErrors(error);
-        console.log(hasError);
+        console.error(hasError);
       }
       setSymbol('');
     }
@@ -68,7 +72,11 @@ function App() {
           </button>
         </form>
       </header>
-      <StockInfo company={company} />
+      <StockInfo
+        company={company}
+        dailyPrice={dailyPrice}
+        newsSentiment={newsSentiment}
+      />
       <APIList
         finnhubNews={finnhubNews}
         iexNews={iexNews}

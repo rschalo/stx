@@ -5,13 +5,16 @@ const IEX = (props) => {
     <div className='IEXContainer'>
       <h2>IEX</h2>
       <ul className='IEXList'>
-        <li>Daily Prices</li>
-        <li>High: {props.dailyPrice.high}</li>
-        <li>Low: {props.dailyPrice.low}</li>
         <li>
-          {!props.iexNews.summary ? 'No News' : props.iexNews.summary}
+          {!props.iexNews.headline ? 'No News' : props.iexNews.headline}
           {props.iexNews.headline ? (
-            <a href={`${props.iexNews.url} `}>Read More</a>
+            <a
+              title='read the full article'
+              target='_blank'
+              rel='noopener noreferrer'
+              href={`${props.iexNews.url} `}>
+              Read More
+            </a>
           ) : (
             ''
           )}

@@ -9,6 +9,7 @@ const finnhubAPIcalls = [
   '/company-news',
 ];
 
+// Get date formatted as YYYY-MM-DD
 let date = new Date();
 const today = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
   .toISOString()
@@ -18,6 +19,8 @@ const today = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
 let yesterday = today.split('-');
 yesterday[2] = String(Number(yesterday[2]) - 1);
 yesterday = yesterday.join('-');
+
+// Docs available at: https://finnhub.io/docs/api
 
 const getFinnhub = (symbol) => {
   const finnhubAPIURIs = [];
