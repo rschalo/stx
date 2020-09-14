@@ -5,15 +5,19 @@ import getIEX from './controllers/iex-controller';
 import IEX from './components/iex-stocks.component';
 import getFinnhub from './controllers/finnhub-controller';
 import Finnhub from './components/finnhub-stocks.component';
+import APIList from './components/api-list.component';
+import StockInfo from './components/stock-info.component';
 
 require('dotenv').config();
 
 function App() {
   const [hasError, setErrors] = useState(false);
-  const [symbol, setSymbol] = useState('');
-  const [news, setNews] = useState({});
-  const [company, setCompany] = useState({ name: 'Enter Company Name' });
+  const [symbol, setSymbol] = useState('Enter Company Ticker');
+  const [newsSentiment, setNewsSentiment] = useState({});
+  const [finnhubNews, setFinnhubNews] = useState({});
+  const [company, setCompany] = useState({ name: 'Search Ticker Above' });
   const [dailyPrice, setDailyPrice] = useState({ high: '--', low: '--' });
+  const [iexNews, setIexNews] = useState({});
   const [recommendation, setRecommendation] = useState({});
 
   const handleClick = () => {
@@ -27,12 +31,22 @@ function App() {
       alert('Please enter a valid ticker symbol');
     } else {
       try {
-        getFinnhub.then(([newsData, companyData, recData, priceData]) => {
-          setNews(newsData.data);
-          setCompany(companyData.data);
-          setRecommendation(recData.data);
+        getFinnhub(symbol).then(
+          ([newsSentimentData, companyData, recData, finnhubNewsData]) => {
+            setNewsSentiment(newsSentimentData.data);
+            setCompany(companyData.data);
+            setRecommendation(recData.data);
+            finnhubNewsData.data[0]
+              ? setFinnhubNews(finnhubNewsData.data[0])
+              : setFinnhubNews('No news');
+          }
+        );
+        getIEX(symbol).then(([priceData, iexNewsData]) => {
+          setDailyPrice(priceData.data);
+          iexNewsData.data[0].lang !== 'en'
+            ? setIexNews(iexNewsData.data[1])
+            : setIexNews(iexNewsData.data[0]);
         });
-        getIEX(symbol).then(([priceData]) => setDailyPrice(priceData.data));
       } catch (error) {
         console.log(error);
       }
@@ -56,14 +70,13 @@ function App() {
           </button>
         </form>
       </header>
-      <div className='container'>
-        <div className='companyCard'>{`${company.name}`}</div>
-      </div>
-      <div className='container'>
-        {!hasError ? null : <div>See error: {hasError}</div>}
-        <Finnhub news={news} />
-        <IEX dailyPrice={dailyPrice} />
-      </div>
+      <StockInfo company={company} />
+      <APIList
+        finnhubNews={finnhubNews}
+        iexNews={iexNews}
+        newsSentiment={newsSentiment}
+        dailyPrice={dailyPrice}
+      />
     </div>
   );
 }

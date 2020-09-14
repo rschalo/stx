@@ -1,37 +1,27 @@
 import React from 'react';
 
+let news = [];
+
 const Finnhub = (props) => {
   return (
     <div className='FinnhubContainer'>
       <h2>Finnhub</h2>
-      <ul>
+      <ul className='FinnhubList'>
         <li>Company News Score</li>
-        <li>{props.news.companyNewsScore}</li>
-        <li>{props.news.companyNewsScore}</li>
+        <li>{props.newsSentiment.companyNewsScore}</li>
+        <li>
+          {!props.finnhubNews.summary ? 'No News' : props.finnhubNews.summary}
+          {props.finnhubNews.summary ? (
+            <a href={`${props.finnhubNews.url} `}>Read More</a>
+          ) : (
+            ''
+          )}
+        </li>
+        <li>
+          Bullish:{' '}
+          {props.newsSentiment.sectorAverageBullishPercent > 0.5 ? 'Yes' : 'No'}
+        </li>
       </ul>
-      <div>hi</div>
-      <div>bye</div>
-      <div className='row'>
-        <table>
-          <thead>
-            <tr>
-              <th scope='col'>Brought to you by Finnhub</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr id='news'>
-              <th scope='row'>Company News Score</th>
-              <td>{props.news.companyNewsScore}</td>
-            </tr>
-            <tr id='sentiment'>
-              <th scope='row'>Bullish?</th>
-              <td>
-                {props.news.sectorAverageBullishPercent > 0.5 ? 'Yes' : 'No'}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 };

@@ -24,29 +24,42 @@ form {
 
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.FinnhubContainer {
-  width: 40%;
+a {
+  margin-left: 5px;
+}
+
+/* Begin Stock Info Component Styling */
+
+.StockContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.InfoContainer {
+  width: 80%;
+  background: rgb(49, 49, 49);
+  border: solid gray 1px;
+  border-radius: 5px;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.InfoPiece {
+  min-width: 25%;
   background: rgb(22, 99, 161);
   border: solid gray 1px;
   border-radius: 5px;
   margin: 5px;
-}
-
-.row {
-  width: 45%;
-  height: 200px;
-  background: rgb(49, 49, 49);
-  border: solid 2px grey;
-  border-radius: 5px;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 15px;
-  color: white;
+  min-height: 20px;
 }
 
 .companyCard {
@@ -60,6 +73,52 @@ form {
   margin-top: 15px;
   color: white;
   font-size: 18px;
+}
+
+/* Begin Finnhub Component Styling */
+
+.FinnhubContainer {
+  width: 40%;
+  background: rgb(22, 99, 161);
+  border: solid gray 1px;
+  border-radius: 5px;
+  margin: 5px;
+  min-height: 280px;
+}
+
+.FinnhubList {
+  list-style-type: none;
+  text-align: start;
+  margin-left: -20px;
+}
+
+/* Begin IEX Component Styling */
+
+.IEXContainer {
+  width: 40%;
+  background: rgb(219, 106, 30);
+  border: solid gray 1px;
+  border-radius: 5px;
+  margin: 5px;
+  min-height: 280px;
+}
+
+.IEXList {
+  list-style-type: none;
+  text-align: start;
+  margin-left: -20px;
+}
+
+.row {
+  width: 45%;
+  height: 200px;
+  background: rgb(49, 49, 49);
+  border: solid 2px grey;
+  border-radius: 5px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 15px;
+  color: white;
 }
 
 .stockInput input {

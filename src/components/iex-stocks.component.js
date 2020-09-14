@@ -2,24 +2,21 @@ import React from 'react';
 
 const IEX = (props) => {
   return (
-    <div className='row'>
-      <table>
-        <thead>
-          <tr>
-            <th scope='col'>Brought to you by IEX</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id='high'>
-            <th scope='row'>Daily High</th>
-            <td>{props.dailyPrice.high}</td>
-          </tr>
-          <tr id='low'>
-            <th scope='row'>Daily Low</th>
-            <td>{props.dailyPrice.low}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className='IEXContainer'>
+      <h2>IEX</h2>
+      <ul className='IEXList'>
+        <li>Daily Prices</li>
+        <li>High: {props.dailyPrice.high}</li>
+        <li>Low: {props.dailyPrice.low}</li>
+        <li>
+          {!props.iexNews.summary ? 'No News' : props.iexNews.summary}
+          {props.iexNews.headline ? (
+            <a href={`${props.iexNews.url} `}>Read More</a>
+          ) : (
+            ''
+          )}
+        </li>
+      </ul>
     </div>
   );
 };
